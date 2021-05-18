@@ -16,17 +16,18 @@ repositories {
 }
 
 dependencies {
-    //implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-freemarker")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    //implementation("org.flywaydb:flyway-core")
-    //runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
+    implementation("org.flywaydb:flyway-core")
+    implementation("org.projectlombok:lombok")
+    runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 tasks {
-    "test"(Test::class) {
+    test {
         useJUnitPlatform()
     }
 }
