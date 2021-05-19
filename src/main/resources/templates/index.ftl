@@ -13,13 +13,23 @@
             <td>${user.getId()}</td>
             <td>${user.getFirstName()}</td>
             <td>${user.getLastName()}</td>
-            <td><a href="/edituserform?id=${user.getId()}">edit</a></td>
-            <td><a href="/deleteuserform?id=${user.getId()}">delete</a></td>
+            <td>
+                <form action="/edituserform" method="get">
+                    <input type="hidden" name="id" value="${user.getId()}"/>
+                    <input type="submit" value="Edit"/>
+                </form>
+            </td>
+            <td>
+                <form action="/deleteuserform" method="get">
+                    <input type="hidden" name="id" value="${user.getId()}"/>
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
         </tr>
     </#foreach>
 </table>
 
-<form  action="adduserform" method="get">
+<form action="/adduserform" method="get">
     <input type="submit" value="Add User"/>
 </form>
 
