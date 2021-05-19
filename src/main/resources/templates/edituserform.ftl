@@ -5,4 +5,7 @@
     Last Name <input type="text" name="lastName" value="${user.lastName}" /> <br/>
     <input type="submit" value="edit User" />
 </form>
+<form action="index" method="get">
+    <input type="submit" value="Cancel"/>
+</form>
 </html>
