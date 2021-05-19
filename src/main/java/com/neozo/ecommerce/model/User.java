@@ -25,4 +25,12 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return this.id;
+    }
 }
