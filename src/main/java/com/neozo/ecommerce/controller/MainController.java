@@ -8,8 +8,10 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,32 +26,82 @@ public class MainController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/index")
     public String index(Model model) {
-            model.addAttribute("name", "Foo");
-            return "index";
+        model.addAttribute("users", this.userService.getAll());
+        model.addAttribute("info", "");
+        return "index";
     }
 
-    @GetMapping("/adduser")
+    @GetMapping("/adduserform")
     public String addUserForm() {
-        return "adduser";
+        return "adduserform";
     }
 
-    @PostMapping("/addUser")
-    public String addUser(User user, Model model) {
+    @PostMapping("/useradded")
+    public String userAdded(User user, Model model) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         this.userService.addUser(user, keyHolder);
-        System.out.println("The user " + user + " was added successfully!");
-        model.addAttribute("user", user);
-        model.addAttribute("id", keyHolder.getKey());
-        return "addedsuccessfully";
+        model.addAttribute("users", this.userService.getAll());
+        StringBuilder info = new StringBuilder();
+        info.append("The user ");
+        info.append(user.getFirstName());
+        info.append(" ");
+        info.append(user.getLastName());
+        info.append(" was added successfully with ID ");
+        info.append(keyHolder.getKey());
+        info.append(".");
+        model.addAttribute("info", info.toString());
+        return "index";
     }
 
-    @GetMapping("/showall")
-    public String showAll(Model model) {
-        List<User> users = this.userService.getAll();
-        model.addAttribute("users", users);
-        return "showall";
+    @GetMapping("/edituserform")
+    public String editUserForm(Model model, @RequestParam("id") long id) {
+        System.out.println("The model in editUserForm() is: " + model);
+        System.out.println("The id for editing is " + id);
+        User user = this.userService.getUser(id);
+        System.out.println("The user is " + user);
+        model.addAttribute("user", user);
+        model.addAttribute("id", id);
+        return "edituserform";
+    }
+
+    @PostMapping("/useredited")
+    public String userEdited(User user, Model model) {
+        System.out.println("The user in userEdited() is " + user);
+        this.userService.editUser(user);
+        model.addAttribute("users", this.userService.getAll());
+        StringBuilder info = new StringBuilder();
+        info.append("User with ID " + user.getId());
+        info.append(" was edited and is now " + user.getFirstName() + " " + user.getLastName());
+        model.addAttribute("info", info.toString());
+        return "index";
+    }
+
+    @GetMapping("/deleteuserform")
+    public String deleteUserForm(Model model, @RequestParam("id") long id) {
+        User user = this.userService.getUser(id);
+        model.addAttribute("user", user);
+        model.addAttribute("id", id);
+        return "deleteuserform";
+    }
+
+    @PostMapping("/userdeleted")
+    public String userDeleted(User user, Model model) {
+        System.out.println("User in userDeleted(): " + user);
+        System.out.println("Model in userDeleted(): " + model);
+        this.userService.deleteUser(user.getId());
+        model.addAttribute("users", this.userService.getAll());
+        StringBuilder info = new StringBuilder();
+        info.append("The user ");
+        info.append(user.getFirstName());
+        info.append(" ");
+        info.append(user.getLastName());
+        info.append(" with ID ");
+        info.append(user.getId());
+        info.append(" was deleted.");
+        model.addAttribute("info", info.toString());
+        return "index";
     }
 
 }
