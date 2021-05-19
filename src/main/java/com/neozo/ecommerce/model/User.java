@@ -2,7 +2,6 @@ package com.neozo.ecommerce.model;
 
 import lombok.Data;
 
-@Data
 public class User {
     long id;
 

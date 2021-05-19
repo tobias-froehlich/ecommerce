@@ -2,6 +2,8 @@ package com.neozo.ecommerce.endpoint.impl;
 
 import com.neozo.ecommerce.endpoint.UserEndpoint;
 import com.neozo.ecommerce.model.User;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -24,27 +26,13 @@ public class UserEndpointImpl implements UserEndpoint {
     @Override
     public int addUser(User user) {
         System.out.println("UserEndpointimpl.addUser()");
-        if (user == null) {
-            return 0;
-        }
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("firstName", user.getFirstName());
-        paramMap.put("lastName", user.getLastName());
-        return this.template.update(INSERT_QUERY, paramMap);
+        return this.template.update(INSERT_QUERY, new BeanPropertySqlParameterSource(user));
     }
 
     @Override
     public List<User> getAll() {
         Map<String, Object> paramMap = new HashMap<>();
-        List<Map<String, Object>> list = this.template.queryForList(SELECT_QUERY, paramMap);
-        List<User> users = new ArrayList<>();
-        for(Map<String, Object> item : list) {
-            User user = new User();
-            user.setId((int)item.get("id"));
-            user.setFirstName((String)item.get("firstName"));
-            user.setLastName((String)item.get("LastName"));
-            users.add(user);
-        }
+        List<User> users = this.template.query(SELECT_QUERY, new BeanPropertyRowMapper<>(User.class));
         return users;
     }
 }
