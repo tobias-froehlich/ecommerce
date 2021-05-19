@@ -5,6 +5,7 @@ import com.neozo.ecommerce.model.User;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -24,9 +25,9 @@ public class UserEndpointImpl implements UserEndpoint {
     }
 
     @Override
-    public int addUser(User user) {
+    public int addUser(User user, KeyHolder keyHolder) {
         System.out.println("UserEndpointimpl.addUser()");
-        return this.template.update(INSERT_QUERY, new BeanPropertySqlParameterSource(user));
+        return this.template.update(INSERT_QUERY, new BeanPropertySqlParameterSource(user), keyHolder);
     }
 
     @Override
