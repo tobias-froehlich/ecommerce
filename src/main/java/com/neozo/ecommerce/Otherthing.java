@@ -10,4 +10,8 @@ public class Otherthing {
     public Otherthing() {
         System.out.println("Otherthing is created");
     }
+
+    public void sayHello() {
+        System.out.println("Otherthing says hello.");
+    }
 }

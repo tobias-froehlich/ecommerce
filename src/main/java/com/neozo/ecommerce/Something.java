@@ -8,8 +8,9 @@ public class Something {
     public Otherthing otherthing;
 
     public Something(Otherthing otherthing) {
-        this.otherthing = otherthing;
         System.out.println("Something is created.");
+        this.otherthing = otherthing;
+        this.otherthing.sayHello();
     }
 
 }
