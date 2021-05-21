@@ -1,7 +1,6 @@
 package com.neozo.ecommerce.model;
 
 import lombok.Data;
-import org.springframework.security.core.userdetails.UserDetails;
 
 public class User {
     long id;
