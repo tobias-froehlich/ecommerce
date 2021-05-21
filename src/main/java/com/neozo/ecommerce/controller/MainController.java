@@ -47,7 +47,8 @@ public class MainController {
     }
 
     @GetMapping("/adduserform")
-    public String addUserForm() {
+    public String addUserForm(Model model) {
+        System.out.println("Model in addUserForm(): " + model);
         return "adduserform";
     }
 
