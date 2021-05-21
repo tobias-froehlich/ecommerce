@@ -66,19 +66,19 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-//        System.out.println("I'm in successfulAuthentication.");
-//        System.out.println("auth = " + auth);
-//        System.out.println("auth.getPrincipal() = " + auth.getPrincipal());
-//        String token = JWT.create()
-//                .withSubject(((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername())
-//                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-//                .sign(Algorithm.HMAC512(SECRET.getBytes()));
-//
-//        String body = ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername() + " " + token;
-//
-//        res.getWriter().write(body);
-//        res.getWriter().flush();
-        super.successfulAuthentication(req, res, chain, auth);
-        chain.doFilter(req, res);
+        System.out.println("I'm in successfulAuthentication.");
+        System.out.println("auth = " + auth);
+        System.out.println("auth.getPrincipal() = " + auth.getPrincipal());
+        String token = JWT.create()
+                .withSubject(((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .sign(Algorithm.HMAC512(SECRET.getBytes()));
+
+        String body = ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername() + " " + token;
+
+        res.getWriter().write(body);
+        res.getWriter().flush();
+//        super.successfulAuthentication(req, res, chain, auth);
+//        chain.doFilter(req, res);
     }
 }
