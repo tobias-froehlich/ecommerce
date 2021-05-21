@@ -1,16 +1,11 @@
 package com.neozo.ecommerce.model;
 
-import lombok.Data;
-
 public class User {
+
     long id;
-
     String username;
-
     String password;
-
     String firstName;
-
     String lastName;
 
     public String getUsername() {

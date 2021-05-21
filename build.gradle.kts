@@ -29,7 +29,7 @@ dependencies {
 
 tasks {
     bootRun {
-        systemProperty("spring.profiles.active", "test")
+        systemProperty("spring.profiles.active", "preprod")
     }
     test {
         useJUnitPlatform()

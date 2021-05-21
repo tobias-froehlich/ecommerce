@@ -5,7 +5,6 @@ import com.neozo.ecommerce.endpoint.impl.UserEndpointImpl;
 import com.neozo.ecommerce.model.User;
 import com.neozo.ecommerce.service.UserService;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,13 +16,11 @@ public class UserServiceImpl implements UserService {
 
 
     public UserServiceImpl(UserEndpointImpl userEndpoint) {
-        System.out.println("UserServiceImpl is created.");
         this.userEndpoint = userEndpoint;
     }
 
     @Override
     public int addUser(User user, KeyHolder keyHolder) {
-        System.out.println("UserServiceImpl.addUser()");
         return this.userEndpoint.addUser(user, keyHolder);
     }
 

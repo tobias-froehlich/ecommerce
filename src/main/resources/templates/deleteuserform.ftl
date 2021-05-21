@@ -3,8 +3,8 @@
     ID <input type="number" name="id" value="${user.id}" readonly /> <br/>
     First Name <input type="text" name="firstName" value="${user.firstName}" readonly /> <br/>
     Last Name <input type="text" name="lastName" value="${user.lastName}" readonly /> <br/>
-    Username: <input type="text" name="username" value="maxmustermann" /> <br/>
-    Passwort: <input type="text" name="password" value="123"/> <br/>
+    Username: <input type="text" name="username" value="${user.username}" readonly /> <br/>
+    Passwort: <input type="text" name="password" value="${user.password}" readonly /> <br/>
     <input type="submit" value="delete User" />
 </form>
 <form action="index" method="get">

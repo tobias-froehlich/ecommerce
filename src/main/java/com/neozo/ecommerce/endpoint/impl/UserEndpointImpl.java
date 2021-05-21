@@ -19,17 +19,15 @@ public class UserEndpointImpl implements UserEndpoint {
     final String SELECT_ALL_QUERY = "SELECT * FROM users";
     final String SELECT_BY_ID_QUERY = "SELECT * FROM users WHERE id=:id";
     final String SELECT_BY_USERNAME_QUERY = "SELECT * FROM users WHERE username=:username";
-    final String UPDATE_QUERY = "UPDATE users SET firstName=:firstName, lastName=:lastName username=:username password=:password WHERE id=:id";
+    final String UPDATE_QUERY = "UPDATE users SET firstName=:firstName, lastName=:lastName, username=:username, password=:password WHERE id=:id";
     final String DELETE_BY_ID_QUERY = "DELETE FROM users WHERE id=:id";
 
     public UserEndpointImpl(NamedParameterJdbcTemplate template) {
-        System.out.println("EndpointImpl is created.");
         this.template = template;
     }
 
     @Override
     public int addUser(User user, KeyHolder keyHolder) {
-        System.out.println("UserEndpointimpl.addUser()");
         return this.template.update(INSERT_QUERY, new BeanPropertySqlParameterSource(user), keyHolder);
     }
 
