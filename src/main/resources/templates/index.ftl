@@ -5,6 +5,8 @@
         <td>ID</td>
         <td>First Name</td>
         <td>Last Name</td>
+        <td>User Name</td>
+        <td>Password</td>
         <td></td>
         <td></td>
     </tr>
@@ -13,6 +15,8 @@
             <td>${user.getId()}</td>
             <td>${user.getFirstName()}</td>
             <td>${user.getLastName()}</td>
+            <td>${user.getUsername()}</td>
+            <td>${user.getPassword()}</td>
             <td>
                 <form action="/edituserform" method="get">
                     <input type="hidden" name="id" value="${user.getId()}"/>

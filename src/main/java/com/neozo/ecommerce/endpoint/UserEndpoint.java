@@ -8,7 +8,9 @@ import java.util.List;
 public interface UserEndpoint {
     int addUser(User user, KeyHolder keyHolder);
     User getUser(long id);
+    User getUser(String username);
     void editUser(User user);
     void deleteUser(long id);
     List<User> getAll();
+
 }

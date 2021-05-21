@@ -26,6 +26,19 @@ public class MainController {
         this.userService = userService;
     }
 
+    @GetMapping("/mylogin")
+    public String myLogin() {
+        System.out.println("Controller.myLogin().");
+        return "mylogin";
+    }
+
+    @PostMapping("/loggedin")
+    public String loggedin(User user, Model model) {
+        System.out.println("Controller.loggedin().");
+        System.out.println("model = " + model);
+        return "index";
+    }
+
     @GetMapping("/index")
     public String index(Model model) {
         model.addAttribute("users", this.userService.getAll());
